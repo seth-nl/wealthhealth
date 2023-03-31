@@ -3,53 +3,84 @@ import { useState } from 'react'
 // import { Modal } from 'simple-fade-modal-component'
 
 //components
-// import DropDown from '../Dropdown'
-// import DatePickerComponent from '../DatePickerComponent'
-// import TextInput from '../TextInput'
-// import Button from '@mui/material/Button'
+import TextInput from './TextInput'
+import Button from '@mui/material/Button'
+import DropdownForm from './Dropdown'
+import DatepickerForm from './Datepicker'
+
+import states from '../assets/dataCities'
+import departments from '../assets/dataDepartments'
 
 //redux
 import { useSelector, useDispatch } from 'react-redux'
 
 //selector
-import { selectStore, selectFirstName, selectLastName } from '../../utils/selectors'
+import { selectFirstName, selectLastName } from '../utils/selectors'
 
 //features
-import { reset } from '../../features/formData'
+import { reset, updateEmployee } from '../utils/store'
 import { useEffect } from 'react'
+import { store } from '../utils/store'
 
 function Form() {
-	const store = useSelector(selectStore)
+	// const store = useSelector((state) => state.initialState)
 	const dispatch = useDispatch()
 
-	const firstName = useSelector(selectFirstName)
-	const lastName = useSelector(selectLastName)
+	// const firstName = useSelector(selectFirstName)
+	// const lastName = useSelector(selectLastName)
 
+	const [getFirstName, setFirstName] = useState()
 	const [errorFirstName, setErrorFirstName] = useState()
+	const [getlastName, setLastName] = useState()
 	const [errorLastName, setErrorLastName] = useState()
 
+	const [formState, setFormState] = useState()
+	const [formDepartment, setFormDepartment] = useState()
+
+	const [birthDate, setBirthDate] = useState()
+	const [startDate, setStartDate] = useState()
+	const [street, setStreet] = useState()
+	const [city, setCity] = useState()
+	const [zipCode, setZipCode] = useState()
+
+
 	//user error feeback
-	useEffect(() => {
-		firstName.length > 0 && setErrorFirstName(false)
-		lastName.length > 0 && setErrorLastName(false)
-	}, [firstName, lastName])
+	// useEffect(() => {
+	// 	getFirstName.length > 0 && setErrorFirstName(false)
+	// 	getlastName.length > 0 && setErrorLastName(false)
+	// }, [getFirstName, getlastName])
 
 	//Form verificaton
 	const handleSumbit = (e) => {
 		e.preventDefault()
-		if ((firstName === '' || undefined) & (lastName === '' || undefined)) {
+		console.log("BAASSU DETTO", birthDate)
+		console.log("SUUTATTO DETTO", startDate)
+		const employee = {
+		  firstname : getFirstName,
+		  lastname : getlastName,
+		  birthdate : birthDate,
+		  startdate : startDate,
+		  street : street,
+		  city : city,
+		  zipcode : zipCode,
+		  state : formState,
+		  department : formDepartment
+		}
+
+		if ((getFirstName === '' || undefined) & (getlastName === '' || undefined)) {
 			setErrorFirstName(true)
 			setErrorLastName(true)
 			return
 		}
-		if (lastName === '' || undefined) {
+		if (getlastName === '' || undefined) {
 			setErrorLastName(true)
 			return
 		}
-		if (firstName === '' || undefined) {
+		if (getFirstName === '' || undefined) {
 			setErrorFirstName(true)
 			return
 		} else setErrorFirstName(false)
+		dispatch(updateEmployee(employee))
 		updateEmployees()
 		dispatch(reset())
 		// toggle()
@@ -57,12 +88,16 @@ function Form() {
 
 	//local storage dispatch
 	const updateEmployees = () => {
-		//get localStorage and parse it
-		let storage = JSON.parse(localStorage.getItem('Employee'))
-		//ig storage null, initialize store as a table, if not : push storage to store
-		storage === null ? (storage = [store]) : storage.push(store)
-		//set localStorage with jsoned storage
-		localStorage.setItem('Employee', JSON.stringify(storage))
+		//check if localstorage exists, if not, create the employees item
+		if(!localStorage.getItem('Employees')){
+			localStorage.setItem('Employees', JSON.stringify([]))
+		}
+		// get localstorage item and parse it
+		const employeesFromLocalStorage = localStorage.getItem('Employees')
+		const employees = JSON.parse(employeesFromLocalStorage)
+		// add item
+		employees.push(store.getState())
+		localStorage.setItem('Employees', JSON.stringify(employees))
 	}
 
 	//modal requirments
@@ -77,23 +112,24 @@ function Form() {
 				<div className="employee-infos">
 					<fieldset className="employee-personal-infos">
 						<legend>Employee infos</legend>
-						{/* <TextInput errorStatus={errorFirstName} id="firstName" label="First Name" />
-						<TextInput errorStatus={errorLastName} id="lastName" label="Last Name" />
-						<DatePickerComponent id="dateOfBirth" />
-						<DatePickerComponent id="startDate" /> */}
+						<TextInput errorStatus={errorFirstName} id="firstName" label="First Name" onchange={setFirstName} />
+						<TextInput errorStatus={errorLastName} id="lastName" label="Last Name" onchange={setLastName} />
+						<DatepickerForm label="Birth date" id="dateOfBirth" onchange={setBirthDate} />
+						<DatepickerForm label="Start date" id="startDate" onchange={setStartDate} />
 					</fieldset>
 					<fieldset className="employee-adress">
 						<legend>Address</legend>
-						{/* <TextInput id="street" label="Street" />
-						<TextInput id="city" label="City" />
-						<DropDown id="state" />
-						<TextInput id="zipCode" label="Zip Code" />
-						<DropDown id="department" /> */}
+						<TextInput id="street" label="Street" onchange={setStreet} />
+						<TextInput id="city" label="City" onchange={setCity} />
+						<DropdownForm id="state" label="State" options={states} onchange={setFormState}/>
+						<TextInput id="zipCode" label="Zip Code" onchange={setZipCode} />
+						<DropdownForm id="department" label="Department" options={departments} onchange={setFormDepartment}/>
+
 					</fieldset>
 				</div>
-				{/* <Button type="submit" variant="contained" size="small">
+				 <Button type="submit" variant="contained" size="small">
 					Save
-				</Button> */}
+				</Button>
 			</form>
 			{/* <Modal autoRefreshOnExit={400} toggleModal={toggle} modalState={modalState} fadeDuration="400ms">
 				Employee created !

@@ -24,6 +24,15 @@
   color: white;
 }
 
+h2{
+  text-align: center;
+}
+button{
+  margin: 1rem 0 !important;
+  font-size: 2rem !important;
+  padding: .5rem 1rem !important;
+}
+
 .App-link {
   color: #61dafb;
 }
@@ -66,4 +75,100 @@ label {
 
 .address {
   margin-top: 10px;
+}
+
+
+
+/* NEW CSS*/
+
+body {
+	font-family: 'Roboto', sans-serif;
+}
+
+fieldset {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	padding: 25px;
+	border-width: 1px;
+}
+
+a:visited {
+	text-decoration: none;
+	color: #1976d2;
+}
+
+a {
+	text-decoration: none;
+}
+
+.react-datepicker-wrapper {
+	width: auto;
+}
+
+.title {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.birth-date {
+	margin-right: 1px;
+}
+
+.employee-infos {
+	margin-bottom: 15px;
+}
+
+.employee-adress {
+	margin-top: 10px;
+}
+
+.datatable {
+	margin-top: 1.83em;
+}
+
+.modal-wrapper {
+	background-color: #1976d2;
+}
+
+.pagination-count {
+	margin: 0 3px 0 3px;
+}
+
+.table-settings {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 15px;
+}
+
+.MuiTextField-root{
+  padding: 1rem !important;
+}
+.MuiInputLabel-formControl{
+  padding: 0 1rem !important;
+}
+
+.react-datepicker-popper{
+  z-index: 2 !important;
+}
+
+#create-employee{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.ag-theme-alpine{
+  width: 90% !important;
+  height: 600px !important;
 }

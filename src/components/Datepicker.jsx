@@ -4,11 +4,21 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 
-function DatepickerForm(){
+function DatepickerForm(props){
   const [startDate, setStartDate] = useState(new Date())
+  const onchangeFunc = (e) => {
+    setStartDate(e)
+    // console.log(props.onchange(value))
+    props.onchange(e.toString())
+  }
+
+
+
   return (
     <div>
-      <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
+      <p>{props.label}</p>
+      {/* <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} /> */}
+      <DatePicker selected={startDate} onChange={(date) => {onchangeFunc(date)}} dateFormat='yyyy-MM-dd' />
     </div>
   )
 

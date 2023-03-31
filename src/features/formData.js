@@ -2,7 +2,7 @@
 import { createReducer } from '@reduxjs/toolkit'
 
 //initialState
-const initialState = {
+export const initialState = {
 	firstName: '',
 	lastName: '',
 	dateOfBirth: '',

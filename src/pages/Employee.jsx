@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
+// import DataTable from '../components/Table'
 
 // import DataTable from '../../Components/DataTable';
+import Tablev2 from '../components/Tablev2'
 
 function EmployeeListPage() {
 	return (
@@ -9,6 +11,8 @@ function EmployeeListPage() {
 			<Link to="/">Home</Link>
 			<table id="employee-table" className="display"></table>
 			{/* <DataTable /> */}
+			{/* <DataTable /> */}
+			<Tablev2 />
 		</div>
 	)
 }

@@ -1,5 +1,5 @@
-export const selectStore = (state) => state.employeeDataReducer
+export const selectStore = (state) => state
 
-export const selectFirstName = (state) => state.employeeDataReducer.firstName
+export const selectFirstName = (state) => state.firstName
 
-export const selectLastName = (state) => state.employeeDataReducer.lastName
+export const selectLastName = (state) => state.lastName
