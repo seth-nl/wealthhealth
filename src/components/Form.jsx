@@ -21,6 +21,7 @@ import { selectFirstName, selectLastName } from '../utils/selectors'
 import { reset, updateEmployee } from '../utils/store'
 import { useEffect } from 'react'
 import { store } from '../utils/store'
+import Modal from './Modal'
 
 function Form() {
 	// const store = useSelector((state) => state.initialState)
@@ -42,6 +43,8 @@ function Form() {
 	const [street, setStreet] = useState()
 	const [city, setCity] = useState()
 	const [zipCode, setZipCode] = useState()
+
+	const [modal, setModal] = useState(false)
 
 
 	//user error feeback
@@ -81,6 +84,7 @@ function Form() {
 			return
 		} else setErrorFirstName(false)
 		dispatch(updateEmployee(employee))
+		setModal(true)
 		updateEmployees()
 		dispatch(reset())
 		// toggle()
@@ -131,9 +135,8 @@ function Form() {
 					Save
 				</Button>
 			</form>
-			{/* <Modal autoRefreshOnExit={400} toggleModal={toggle} modalState={modalState} fadeDuration="400ms">
-				Employee created !
-			</Modal> */}
+
+			<Modal toggler={setModal} modal={modal} text={"Employee created !"} />
 		</>
 	)
 }
