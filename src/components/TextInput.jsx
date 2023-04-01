@@ -1,22 +1,7 @@
-//redux
-// import { useDispatch } from 'react-redux'
-
-//features
-// import { storeUserInput } from '../utils/store'
-
 import { TextField } from '@mui/material'
 
 function TextInput({ id, label, errorStatus, onchange }) {
-	// const dispatch = useDispatch()
-    // const onChangeFunction = (e, id) => {
-    //   console.log("--- id : ", id)
-    //   dispatch(storeUserInput(e, id))
-    // }
-    // const onChangeFunction = (e) => {
-    //     console.log(e)
-    //     onchange(e.target.value)
 
-    //   }
 	return (
 		<>
 			<TextField
@@ -27,7 +12,7 @@ function TextInput({ id, label, errorStatus, onchange }) {
 				variant="outlined"
 				size="small"
 				onChange={(e) => {
-					onchange(e.target.value)
+				  onchange(e.target.value)
 				}}
 			/>
 		</>

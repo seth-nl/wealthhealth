@@ -1,88 +1,15 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
 h2{
   text-align: center;
 }
-button{
-  margin: 1rem 0 !important;
-  font-size: 2rem !important;
-  padding: .5rem 1rem !important;
-}
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-
-
-
-
-
-/* old css */
-
-.title {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+body {
+	font-family: 'Roboto', sans-serif;
 }
 
 label {
   display: block;
   margin-top: 1rem;
   margin-bottom: 10px;
-}
-
-.address {
-  margin-top: 10px;
-}
-
-
-
-/* NEW CSS*/
-
-body {
-	font-family: 'Roboto', sans-serif;
 }
 
 fieldset {
@@ -102,10 +29,6 @@ a {
 	text-decoration: none;
 }
 
-.react-datepicker-wrapper {
-	width: auto;
-}
-
 .title {
 	display: flex;
 	align-items: center;
@@ -119,8 +42,15 @@ a {
 	justify-content: center;
 }
 
-.birth-date {
-	margin-right: 1px;
+/* FORM STYLE */
+form button{
+  margin-bottom: 2rem !important;
+  padding: 0.3rem 1.2rem !important;
+  font-size: 2rem !important;
+  font-weight: bold !important;
+  border-radius: 15px !important;
+  background-color: rgb(167, 201, 167) !important;
+  text-shadow: 0 0 1px gray, 0 0 1px gray, 0 0 1px gray, 0 0 1px gray;
 }
 
 .employee-infos {
@@ -129,25 +59,6 @@ a {
 
 .employee-adress {
 	margin-top: 10px;
-}
-
-.datatable {
-	margin-top: 1.83em;
-}
-
-.modal-wrapper {
-	background-color: #1976d2;
-}
-
-.pagination-count {
-	margin: 0 3px 0 3px;
-}
-
-.table-settings {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	margin-bottom: 15px;
 }
 
 .MuiTextField-root{
@@ -167,13 +78,6 @@ a {
   justify-content: center;
   align-items: center;
 }
-
-.ag-theme-alpine{
-  width: 90% !important;
-  height: 600px !important;
-}
-
-
 
 /* MODAL */
 .modal-container{
@@ -231,4 +135,23 @@ a {
   width: 30px;
   height: 30px;
   cursor: pointer;
+}
+
+/* ag grid custom css */
+.ag-theme-alpine{
+  width: 90% !important;
+  height: 600px !important;
+}
+#table-header{
+  background-color: rgb(170, 204, 170);
+  padding: 1rem;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+#table-header .title-header select{
+  margin-left: 5px;
+}
+#table-header input{
+  margin: 0 50px;
 }

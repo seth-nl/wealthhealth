@@ -1,60 +1,75 @@
-import { useState, useCallback, useRef } from 'react'
-import { AgGridColumn, AgGridReact } from 'ag-grid-react'
+import React, { useState, useCallback, useRef } from 'react'
+import { AgGridReact } from 'ag-grid-react'
 
-function DataTable() {
-	const storage = JSON.parse(localStorage.getItem('Employee'))
-	const [rowData] = useState(storage ? storage : [])
+import 'ag-grid-community/styles/ag-grid.css'
+import 'ag-grid-community/styles/ag-theme-alpine.css'
 
-	const gridRef = useRef()
-	const [gridApi, setGridApi] = useState(null)
+function Table () {
 
-	const onFirstDataRendered = useCallback(() => {
-		gridRef.current.api.sizeColumnsToFit()
-	}, [])
+  const getEmployees = localStorage.getItem("Employees")
+  const employees = JSON.parse(getEmployees)
+  const [rowData] = useState(employees)
 
-	const onPageSizeChanged = useCallback(() => {
-		var value = document.getElementById('page-size').value
-		gridRef.current.api.paginationSetPageSize(Number(value))
-	}, [])
+  const [columnDefs] = useState([
+    { field: 'city',
+      sortable: true },
+    { field: 'dateOfBirth',
+      sortable: true },
+    { field: 'department',
+      sortable: true },
+    { field: 'firstName',
+      sortable: true },
+    { field: 'lastName',
+      sortable: true },
+    { field: 'startDate',
+      sortable: true },
+    { field: 'state',
+      sortable: true },
+    { field: 'street',
+      sortable: true },
+    { field: 'zipCode',
+      sortable: true }
+  ])
+  const gridRef = useRef();
+  const onFilterTextBoxChanged = useCallback(() => {
+    gridRef.current.api.setQuickFilter(
+    document.getElementById('filter-text-box').value
+  )
+  }, [])
+  const onPageSizeChanged = useCallback(() => {
+    var value = document.getElementById('page-size').value
+    gridRef.current.api.paginationSetPageSize(Number(value))
+  }, [])
 
-	function onGridReady(params) {
-		setGridApi(params.api)
-	}
-
-	const onFilterTextChange = (e) => {
-		gridApi.setQuickFilter(e.target.value)
-	}
-
-	return (
-		<div className="ag-theme-alpine datatable" style={{ width: '1100px', height: '536px' }}>
-			<div className="table-settings">
-				<div className="pagination-count-wrapper">
-					Show
-					<select className="pagination-count" onChange={onPageSizeChanged} id="page-size">
-						<option value="10">10</option>
-						<option value="25">25</option>
-						<option value="50">50</option>
-						<option value="100">100</option>
-					</select>
-					entries
-				</div>
-				<input type="search" placeholder="Filter..." onChange={onFilterTextChange}></input>
-			</div>
-
-			{/* onFirstDataRendered={onFirstDataRendered} */}
-			<AgGridReact onGridReady={onGridReady} onFirstDataRendered={onFirstDataRendered} paginationPageSize={10} pagination={true} ref={gridRef} rowData={rowData}>
-				<AgGridColumn headerName="First Name" field="firstName" sortable={true}></AgGridColumn>
-				<AgGridColumn headerName="Last Name" field="lastName" sortable={true}></AgGridColumn>
-				<AgGridColumn headerName="Start Date" field="startDate" sortable={true}></AgGridColumn>
-				<AgGridColumn headerName="Department" field="department" sortable={true}></AgGridColumn>
-				<AgGridColumn headerName="Date of Birth" field="dateOfBirth" sortable={true}></AgGridColumn>
-				<AgGridColumn headerName="Street" field="street" sortable={true}></AgGridColumn>
-				<AgGridColumn headerName="City" field="city" sortable={true}></AgGridColumn>
-				<AgGridColumn headerName="State" field="state" sortable={true}></AgGridColumn>
-				<AgGridColumn headerName="Zip Code" field="zipCode" sortable={true}></AgGridColumn>
-			</AgGridReact>
-		</div>
-	)
+  return (
+    <div className="ag-theme-alpine" style={{height: 400, width: 600}}>
+      <div className='ag-header' id="table-header">
+        <div className="title-header">
+          Page Size:
+          <select onChange={onPageSizeChanged} id="page-size" defaultValue={10}>
+            <option value="10">10</option>
+            <option value="100">100</option>
+            <option value="500">500</option>
+            <option value="1000">1000</option>
+          </select>
+        </div>
+        <input
+          type="text"
+          id="filter-text-box"
+          placeholder="Filter..."
+          onInput={onFilterTextBoxChanged}
+        />
+      </div>
+      <AgGridReact
+        ref={gridRef}
+        rowData={rowData}
+        columnDefs={columnDefs}
+        pagination={true}
+        paginationPageSize={10}
+        cacheQuickFilter={true}>
+      </AgGridReact>
+    </div>
+   )
 }
 
-export default DataTable
+export default Table

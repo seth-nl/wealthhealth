@@ -1,12 +1,12 @@
 import { useState } from 'react'
 
-// import { Modal } from 'simple-fade-modal-component'
 
 //components
 import TextInput from './TextInput'
 import Button from '@mui/material/Button'
 import DropdownForm from './Dropdown'
 import DatepickerForm from './Datepicker'
+import { Modal } from 'typescript-modal-component'
 
 import states from '../assets/dataCities'
 import departments from '../assets/dataDepartments'
@@ -14,22 +14,12 @@ import departments from '../assets/dataDepartments'
 //redux
 import { useDispatch } from 'react-redux'
 
-//selector
-// import { selectFirstName, selectLastName } from '../utils/selectors'
-
 //features
 import { reset, updateEmployee } from '../utils/store'
-// import { useEffect } from 'react'
 import { store } from '../utils/store'
-// import Modal from './Modal'
-import { Modal } from 'typescript-modal-component'
 
 function Form() {
-	// const store = useSelector((state) => state.initialState)
 	const dispatch = useDispatch()
-
-	// const firstName = useSelector(selectFirstName)
-	// const lastName = useSelector(selectLastName)
 
 	const [getFirstName, setFirstName] = useState()
 	const [errorFirstName, setErrorFirstName] = useState()
@@ -38,27 +28,16 @@ function Form() {
 
 	const [formState, setFormState] = useState()
 	const [formDepartment, setFormDepartment] = useState()
-
 	const [birthDate, setBirthDate] = useState()
 	const [startDate, setStartDate] = useState()
 	const [street, setStreet] = useState()
 	const [city, setCity] = useState()
 	const [zipCode, setZipCode] = useState()
-
 	const [modal, setModal] = useState(false)
-
-
-	//user error feeback
-	// useEffect(() => {
-	// 	getFirstName.length > 0 && setErrorFirstName(false)
-	// 	getlastName.length > 0 && setErrorLastName(false)
-	// }, [getFirstName, getlastName])
 
 	//Form verificaton
 	const handleSumbit = (e) => {
 		e.preventDefault()
-		console.log("BAASSU DETTO", birthDate)
-		console.log("SUUTATTO DETTO", startDate)
 		const employee = {
 		  firstname : getFirstName,
 		  lastname : getlastName,
@@ -88,7 +67,6 @@ function Form() {
 		setModal(true)
 		updateEmployees()
 		dispatch(reset())
-		// toggle()
 	}
 
 	//local storage dispatch
@@ -104,12 +82,6 @@ function Form() {
 		employees.push(store.getState())
 		localStorage.setItem('Employees', JSON.stringify(employees))
 	}
-
-	//modal requirments
-	// const [modalState, setModalState] = useState(false)
-	// const toggle = () => {
-	// 	setModalState((prev) => !prev)
-	// }
 
 	return (
 		<>
