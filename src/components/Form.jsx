@@ -12,16 +12,17 @@ import states from '../assets/dataCities'
 import departments from '../assets/dataDepartments'
 
 //redux
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 //selector
-import { selectFirstName, selectLastName } from '../utils/selectors'
+// import { selectFirstName, selectLastName } from '../utils/selectors'
 
 //features
 import { reset, updateEmployee } from '../utils/store'
-import { useEffect } from 'react'
+// import { useEffect } from 'react'
 import { store } from '../utils/store'
-import Modal from './Modal'
+// import Modal from './Modal'
+import { Modal } from 'typescript-modal-component'
 
 function Form() {
 	// const store = useSelector((state) => state.initialState)
